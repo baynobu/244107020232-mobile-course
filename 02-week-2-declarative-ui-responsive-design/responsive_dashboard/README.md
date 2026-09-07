@@ -95,12 +95,9 @@ flutter run
 
 Uji ponsel portrait, ponsel landscape, dan tablet. Pastikan layar sempit menampilkan satu kolom, layar lebar dua kolom, dan switch berpindah antara light theme dan dark theme.
 
-Screenshot tugas dapat disimpan di:
+Screenshot AI - Challenge:
 
-```text
-screenshots/ai-challenge.PNG
-
-```
+![screenshots](screenshots/ai-challenge.PNG)
 
 ## Refleksi 
 1. Apa perbedaan cara berpikir imperative dan declarative saat membangun UI?, imperative menjelaskan langkah langkah untuk mengubah ui, misalnya mencari komponen lalu mengubah tampilannya secara manual sedangkan declarative menjelaskan kondisi ui yang diingkan berdasarkan satate
