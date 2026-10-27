@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+    branches: [ main, develop, 'feat/**', 'fix/**' ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        working-directory: 08-week-8-mid-project-review/campus_notify
+        run: flutter pub get
+
+      - name: Static Analysis
+        working-directory: 08-week-8-mid-project-review/campus_notify
+        run: flutter analyze
+
+      - name: Verify Code Formatting
+        working-directory: 08-week-8-mid-project-review/campus_notify
+        run: dart format --set-exit-if-changed .
+
+      - name: Run Unit Tests
+        working-directory: 08-week-8-mid-project-review/campus_notify
+        run: flutter test
