@@ -148,6 +148,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                         // Email Field
                         TextFormField(
+                          key: const Key('login-email-field'),
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
@@ -174,6 +175,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                         // Password Field
                         TextFormField(
+                          key: const Key('login-password-field'),
                           controller: _passwordController,
                           obscureText: _obscurePassword,
                           decoration: InputDecoration(
@@ -212,6 +214,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                         // Submit Button
                         ElevatedButton(
+                          key: const Key('login-submit-button'),
                           onPressed: isLoading ? null : _handleLogin,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF1E3A8A),

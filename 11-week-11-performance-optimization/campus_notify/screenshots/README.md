@@ -1,56 +1,24 @@
-# Panduan Pengambilan Screenshot Profiling (Week 11)
+# Direktori Tangkapan Layar (Screenshots) Week 12: Pengujian dan Jaminan Kualitas
 
-Direktori ini digunakan untuk menyimpan seluruh tangkapan layar (*screenshots*) hasil profiling performa menggunakan **Flutter DevTools** dan pengujian otomatis pada terminal.
+Dokumentasi visual bukti eksekusi pengujian otomatis, analisis statis, cakupan kode (*code coverage*), serta pengujian integrasi aplikasi **Campus Notify**:
 
----
+1. `01_unit_tests_pass.png`
+   - Bukti eksekusi unit testing fungsi validasi (`isValidTaskTitle`, `validateEmail`, `validatePassword`, `validateSearchQuery`) dan fake repository (`TaskService` & `FakeTaskRepository`) menggunakan pola Arrange-Act-Assert (AAA) yang lulus 100%.
 
-## Daftar File Screenshot yang Wajib Disimpan
+2. `02_widget_tests_pass.png`
+   - Bukti eksekusi widget testing antarmuka `LoginPage` (pemeriksaan tampilan form awal, validasi masukan kosong, email tanpa `@`, password < 6 karakter, form submission) dan `AnnouncementSection` / `AnnouncementCardTile` yang lulus 100%.
 
-| No | Nama Berkas | Lokasi / Tab Sumber | Kondisi & Tampilan yang Diharapkan |
-|:---:|---|---|---|
-| **1** | `before-profile.png` | **DevTools → Tab Performance** | Grafik **Flame Chart** dan **Frame Chart** baseline (sebelum optimasi) yang memperlihatkan frame bar kuning/merah (> 16.6 ms) serta call stack build widget monolitik saat scrolling cepat. |
-| **2** | `after-profile.png` | **DevTools → Tab Performance** | Grafik **Flame Chart** dan **Frame Chart** setelah optimasi kode, memperlihatkan frame bar hijau stabil (< 16.6 ms / 60 FPS) dan call stack yang ramping. |
-| **3** | `memory-profile.png` | **DevTools → Tab Memory** | Tampilan **Heap Snapshot** setelah melakukan interaksi navigasi bolak-balik (Dashboard ↔ Detail Pengumuman sebanyak 5x) untuk membuktikan tidak ada akumulasi memori atau memory leak. |
-| **4** | `analyze-test.png` | **Terminal (VS Code / PowerShell)** | Tampilan output perintah `flutter analyze` (**No issues found!**) dan `flutter test` (**All tests passed!**). |
+3. `03_all_tests_green.png`
+   - Bukti eksekusi seluruh suite pengujian otomatis (`flutter test`) yang mencakup 60 pengujian (unit test, fake repository test, caching test, routing test, widget test) dengan status **All tests passed!**.
 
----
+4. `04_coverage_report.png`
+   - Ringkasan tabel cakupan kode (*code coverage report*) yang dihasilkan melalui `flutter test --coverage` dan `coverage/lcov.info` yang membuktikan cakupan kode hingga 100% pada logika validasi dan komponen UI utama.
 
-## Langkah Praktis Pengambilan Screenshot di Flutter DevTools
+5. `05_static_analysis_clean.png`
+   - Bukti eksekusi analisis statis Dart/Flutter (`flutter analyze`) dengan hasil **No issues found!** (bebas lint warning maupun error).
 
-### 1. Menjalankan Aplikasi dalam Mode Profile
-Buka terminal di dalam folder `campus_notify`:
-```powershell
-cd campus_notify
-flutter run -d windows --profile
-# Atau jika menggunakan emulator Android:
-# flutter run -d <id-device> --profile
-```
+6. `06_integration_test_execution.png`
+   - Bukti perintah eksekusi pengujian integrasi end-to-end (`integration_test/app_test.dart`) beserta diagnostik perangkat host (identifikasi kebutuhan toolchain desktop C++ MSBuild atau perangkat emulator Android).
 
-### 2. Membuka Flutter DevTools di Browser
-- Saat aplikasi berjalan di terminal, tekan tombol keyboard `v` untuk membuka DevTools di browser secara otomatis.
-- Atau salin URL yang muncul di terminal (misalnya `http://127.0.0.1:9100`).
-
-### 3. Mengambil Screenshot Tab Performance (`before-profile.png` / `after-profile.png`)
-1. Di DevTools, klik tab **Performance**.
-2. Klik tombol merah **Record**.
-3. Di layar aplikasi, lakukan skenario: scroll ke bawah, scroll ke atas, buka detail pengumuman, klik kembali, dan buka AI chat.
-4. Klik tombol **Stop** di DevTools.
-5. Ambil tangkapan layar (Win + Shift + S di Windows) pada area grafik frame bar dan Flame Chart.
-6. Simpan dengan nama `before-profile.png` (untuk baseline) atau `after-profile.png` (setelah kode teroptimasi).
-
-### 4. Mengambil Screenshot Tab Memory (`memory-profile.png`)
-1. Di DevTools, klik tab **Memory**.
-2. Lakukan navigasi bolak-balik (Buka pengumuman → Kembali → Buka pengumuman → Kembali sebanyak 5 kali).
-3. Klik tombol **Take Heap Snapshot** di pojok kiri atas tab Memory.
-4. Ambil tangkapan layar tampilan analisis heap snapshot.
-5. Simpan dengan nama `memory-profile.png`.
-
-### 5. Mengambil Screenshot Terminal (`analyze-test.png`)
-Jalankan perintah berikut di terminal:
-```powershell
-cd campus_notify
-flutter analyze
-flutter test
-```
-Ambil screenshot terminal yang menampilkan kedua perintah tersebut sukses 100%, lalu simpan dengan nama `analyze-test.png`.
-
+7. `07_app_ui_testing_flow.png`
+   - Visualisasi alur antarmuka pengguna (UI Test Flow) dari keadaan validasi error pada form login hingga transisi sukses menuju dashboard pengumuman akademik kampus.

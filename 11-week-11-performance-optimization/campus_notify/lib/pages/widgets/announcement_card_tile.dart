@@ -23,35 +23,37 @@ class AnnouncementCardTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
+      child: Material(
         color: isHighlight ? const Color(0xFFEFF6FF) : Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: isHighlight
-              ? const Color(0xFF93C5FD)
-              : const Color(0xFFE2E8F0),
-        ),
-      ),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: isHighlight
-              ? const Color(0xFF1E3A8A)
-              : Colors.grey.shade200,
-          child: Text(
-            id,
-            style: TextStyle(
-              color: isHighlight ? Colors.white : Colors.black87,
-              fontWeight: FontWeight.bold,
-            ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(
+            color: isHighlight
+                ? const Color(0xFF93C5FD)
+                : const Color(0xFFE2E8F0),
           ),
         ),
-        title: Text(
-          title,
-          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: isHighlight
+                ? const Color(0xFF1E3A8A)
+                : Colors.grey.shade200,
+            child: Text(
+              id,
+              style: TextStyle(
+                color: isHighlight ? Colors.white : Colors.black87,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          title: Text(
+            title,
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          ),
+          subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
+          trailing: const Icon(Icons.chevron_right, size: 18),
+          onTap: () => context.go(AppRoutes.announcementDetail(id)),
         ),
-        subtitle: Text(subtitle, style: const TextStyle(fontSize: 12)),
-        trailing: const Icon(Icons.chevron_right, size: 18),
-        onTap: () => context.go(AppRoutes.announcementDetail(id)),
       ),
     );
   }
